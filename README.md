@@ -27,10 +27,5 @@ Construído com HTML, CSS e JavaScript puro.
 
 ---
 
-## 🚀 Como rodar
-
-Sem instalação. Basta abrir o `index.html` no navegador.
-
----
 
 <p align="center">Feito por <a href="https://github.com/biacarollin">biacarollin</a> 🖤</p>
