@@ -1,8 +1,3 @@
-// =============================================
-// SELEÇÃO DE ELEMENTOS DO DOM
-// Pegamos as referências dos elementos HTML
-// que vamos manipular ao longo do código.
-// =============================================
 const taskInput   = document.getElementById('taskInput');
 const addBtn      = document.getElementById('addBtn');
 const taskList    = document.getElementById('taskList');
@@ -10,21 +5,9 @@ const taskCount   = document.getElementById('taskCount');
 const clearDoneBtn = document.getElementById('clearDoneBtn');
 const filterBtns  = document.querySelectorAll('.filter-btn');
 
-// =============================================
-// ESTADO DA APLICAÇÃO
-// Toda a lógica gira em torno desse array.
-// Cada tarefa é um objeto: { id, text, done }
-// =============================================
-let tasks = [];          // Array principal de tarefas
-let currentFilter = 'all'; // Filtro ativo: 'all' | 'pending' | 'done'
+let tasks = [];          
+let currentFilter = 'all'; 
 
-// =============================================
-// LOCALSTORAGE — PERSISTÊNCIA DE DADOS
-// Salva e carrega tarefas no navegador,
-// para que não se percam ao recarregar a página.
-// =============================================
-
-// Salva o array de tarefas no localStorage
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
@@ -36,11 +19,6 @@ function loadTasks() {
   tasks = saved ? JSON.parse(saved) : [];
 }
 
-// =============================================
-// RENDERIZAÇÃO
-// Responsável por desenhar a lista na tela
-// com base no estado atual (tasks + filtro).
-// =============================================
 function render() {
   // Filtra as tarefas conforme o filtro ativo
   const filtered = tasks.filter(task => {
@@ -67,11 +45,6 @@ function render() {
   updateCount();
 }
 
-// =============================================
-// CRIA ELEMENTO HTML DE UMA TAREFA
-// Recebe um objeto task e retorna um <li>
-// com checkbox, texto e botão de deletar.
-// =============================================
 function createTaskElement(task) {
   const li = document.createElement('li');
   li.classList.add('task-item');
@@ -100,10 +73,10 @@ function createTaskElement(task) {
   return li;
 }
 
-// =============================================
+// ============================
 // ADICIONAR TAREFA
 // Lê o valor do input, valida e cria o objeto.
-// =============================================
+// =============================
 function addTask() {
   const text = taskInput.value.trim(); // Remove espaços extras
 
@@ -129,10 +102,6 @@ function addTask() {
   taskInput.focus();
 }
 
-// =============================================
-// MARCAR/DESMARCAR TAREFA
-// Inverte o estado .done de uma tarefa pelo id
-// =============================================
 function toggleTask(id) {
   // .find() retorna a tarefa com aquele id
   const task = tasks.find(t => t.id === id);
@@ -143,10 +112,6 @@ function toggleTask(id) {
   }
 }
 
-// =============================================
-// DELETAR TAREFA
-// Remove a tarefa do array pelo id
-// =============================================
 function deleteTask(id) {
   // .filter() retorna um novo array SEM o item deletado
   tasks = tasks.filter(t => t.id !== id);
@@ -174,22 +139,12 @@ function updateCount() {
   taskCount.textContent = `${pending} ${word}`;
 }
 
-// =============================================
-// SEGURANÇA: ESCAPAR HTML
-// Evita XSS — impede que o usuário injete HTML
-// malicioso no texto da tarefa.
-// =============================================
 function escapeHTML(str) {
   const div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
-// =============================================
-// EVENTOS
-// =============================================
-
-// Clique no botão "+"
 addBtn.addEventListener('click', addTask);
 
 // Pressionar Enter no input também adiciona
@@ -213,9 +168,6 @@ filterBtns.forEach(btn => {
 // Clique em "Limpar concluídas"
 clearDoneBtn.addEventListener('click', clearDone);
 
-// =============================================
-// INICIALIZAÇÃO
-// Executado quando a página carrega
-// =============================================
+
 loadTasks(); // Carrega dados salvos
 render();    // Desenha a lista na tela
