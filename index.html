@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts: Syne + DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Cabeçalho -->
+      <header class="header">
+        <h1 class="title">to<span>.</span>do</h1>
+        <p class="subtitle">O que precisa ser feito hoje?</p>
+      </header>
+
+      <!-- Formulário para adicionar tarefa -->
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="taskInput"
+          class="task-input"
+          placeholder="Nova tarefa..."
+          maxlength="100"
+        />
+        <button id="addBtn" class="add-btn" aria-label="Adicionar tarefa">
+          +
+        </button>
+      </div>
+
+      <!-- Filtros -->
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="pending">Pendentes</button>
+        <button class="filter-btn" data-filter="done">Concluídas</button>
+      </div>
+
+      <!-- Lista de tarefas -->
+      <ul id="taskList" class="task-list">
+        <!-- As tarefas são inseridas aqui pelo JavaScript -->
+      </ul>
+
+      <!-- Rodapé com contador e limpar -->
+      <footer class="footer">
+        <span id="taskCount" class="count">0 tarefas pendentes</span>
+        <button id="clearDoneBtn" class="clear-btn">Limpar concluídas</button>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

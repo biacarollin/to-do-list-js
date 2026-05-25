@@ -1,0 +1,313 @@
+/* =============================================
+   VARIÁVEIS GLOBAIS
+   Centralizamos cores e espaçamentos aqui.
+   Para mudar o tema, basta alterar esses valores.
+============================================= */
+:root {
+  --bg: #0f0f0f;
+  --surface: #1a1a1a;
+  --surface-hover: #242424;
+  --border: #2e2e2e;
+  --accent: #d4ff00;       /* Verde-limão como cor de destaque */
+  --accent-dark: #a8cc00;
+  --text: #f0f0f0;
+  --text-muted: #777;
+  --done-color: #444;
+  --radius: 12px;
+  --transition: 0.2s ease;
+}
+
+/* =============================================
+   RESET BÁSICO
+   Zera margens/paddings padrão do navegador
+============================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* =============================================
+   CONTAINER PRINCIPAL
+============================================= */
+.app {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =============================================
+   CABEÇALHO
+============================================= */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-family: 'Syne', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+/* Ponto colorido no título */
+.title span {
+  color: var(--accent);
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* =============================================
+   INPUT + BOTÃO DE ADICIONAR
+============================================= */
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.task-input {
+  flex: 1;             /* Ocupa todo o espaço disponível */
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  padding: 14px 18px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+/* Borda iluminada ao focar no input */
+.task-input:focus {
+  border-color: var(--accent);
+}
+
+.task-input::placeholder {
+  color: var(--text-muted);
+}
+
+.add-btn {
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: #000;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0 20px;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.add-btn:hover {
+  background: var(--accent-dark);
+  transform: scale(1.05);
+}
+
+.add-btn:active {
+  transform: scale(0.97);
+}
+
+/* =============================================
+   FILTROS
+============================================= */
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;   /* Totalmente arredondado (pill) */
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  padding: 6px 16px;
+  transition: all var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Botão de filtro ativo */
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+  font-weight: 500;
+}
+
+/* =============================================
+   LISTA DE TAREFAS
+============================================= */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  min-height: 60px;  /* Espaço mínimo quando a lista está vazia */
+}
+
+/* Mensagem de lista vazia */
+.empty-msg {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 12px 0;
+  text-align: center;
+}
+
+/* =============================================
+   ITEM DE TAREFA
+============================================= */
+.task-item {
+  align-items: center;
+  animation: slideIn 0.2s ease;  /* Animação ao entrar */
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  transition: background var(--transition), opacity var(--transition);
+}
+
+.task-item:hover {
+  background: var(--surface-hover);
+}
+
+/* Checkbox customizado */
+.task-check {
+  appearance: none;        /* Remove estilo padrão do navegador */
+  -webkit-appearance: none;
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 50%;      /* Circular */
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 20px;
+  transition: all var(--transition);
+  width: 20px;
+}
+
+.task-check:hover {
+  border-color: var(--accent);
+}
+
+/* Quando marcado */
+.task-check:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  /* Ícone de check em SVG embutido */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%23000' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 12px;
+}
+
+/* Texto da tarefa */
+.task-text {
+  flex: 1;
+  font-size: 0.95rem;
+  transition: all var(--transition);
+  word-break: break-word;
+}
+
+/* Tarefa concluída: risca o texto e muda a cor */
+.task-item.done .task-text {
+  color: var(--done-color);
+  text-decoration: line-through;
+}
+
+/* Botão de deletar */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 4px;
+  transition: color var(--transition), transform var(--transition);
+}
+
+.delete-btn:hover {
+  color: #ff5e5e;
+  transform: scale(1.2);
+}
+
+/* =============================================
+   RODAPÉ
+============================================= */
+.footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.count {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  transition: color var(--transition);
+}
+
+.clear-btn:hover {
+  color: #ff5e5e;
+}
+
+/* =============================================
+   ANIMAÇÃO DE ENTRADA DOS ITENS
+============================================= */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =============================================
+   RESPONSIVO (telas menores)
+============================================= */
+@media (max-width: 480px) {
+  .title {
+    font-size: 2.2rem;
+  }
+}
